@@ -6,7 +6,11 @@
 //  Copyright © 2019 Massinissa_theking. All rights reserved.
 //
 
-import Foundation
 
-print("Hello, World!")
+
+let massinissa = Wizard (name: "massinissa", life: 99 , dammage: 80, weapon: "sword")
+
+var swiftRobot = Colossus (name: "antonio", life: 100, dammage: 90, weapon: "clavier")
+
+
 
