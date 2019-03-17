@@ -8,70 +8,84 @@
 
 import Foundation
 
-func input() -> Int {
-    let strData = readLine();
-    
-    return Int(strData!)!
-}
 
-
-class Player {
+class Player{
     
-    var name : String
-    var team :[ Character ]
-    var playerChoice : Int
-    
-    init(name: String, team:[ Character], playerChoice: Int) {
-        self.name = name
-        self.team = team
-        self.playerChoice = playerChoice
-    }
-    
-    }
-    
-    func createTeam (){
-        
-        var Character = [Fighter, Colossus, Wizard, Dwarf]
-        var playerChoice : Int
+    var name: String = ""
+    var team: [Character] = []
+    // afficher les personnages disponibles
+     func createTeam (){
+        print(" Bonjour et bienvenue \(name): ")
         
         
-        print(" veuillez choisir parmis les personnages suivant !")
-
-// afficher les personnages existant
-        
-        print("1. Fighter ")
-        print("2. Colossus ")
-        print("3. Wizard ")
-        print("4. Dwarf ")
-        
-        playerChoice = input()
+        // repeter l'operation jusquà ce qu'à avoir 3 personnages
         
         while team.count < 3 {
-            switch playerChoice {
-                
-            case 1: Character = .Fighter
-            case 2: Character =  .Colossus
-            case 3: Character =  .Wizard
-            case 4: Character =  .Dwarf
+            let characterNeeded = 3 - team.count   // le nombre de personnages restant à selectionner
             
-            default:
-                break
+            print("""
+           veuillez constituer votre équipe et choisir entre les personnages suivant:
+            1. Fighter: Le combattant aux 100 points de vies et aux 10 points de dégats
+            2. Colossus: Le gros dur qui ne fait pas trop mal
+            3. Wizard: Le seul magicien capable de bien des surprises
+            4. Dwarf: Le nain qu'il ne faut jamais sous-estimer
+            (Il vous reste \(characterNeeded) personnage à selectionner)
+""")
+            
+            // écouter l'entrée du clavier
+            
+            let entry = readLine()
+            print(entry)
+            
+            if let playerChoice = entry {
+                var character : Character?
+                
+                switch playerChoice {
+                    
+                case "1":
+                    character = Fighter(name:"", life: 100, dammage: 10, weapon:"sword")
+                case "2":
+                    character = Colossus(name:"", life: 110, dammage: 5, weapon:"")
+                case "3":
+                    character = Wizard (name:"" , life: 80, dammage: 3, weapon:"")
+                case "4":
+                    character = Dwarf (name:"", life: 90, dammage: 12, weapon:"")
+                default:
+                    print("Vous n'avez toujours pas selectionné 3 personnages !")
+                }
+                if let char = character {
+                    print("Comment voulez-vous appeler votre personnage?")
+                    if let name = readLine(){
+                        if name.count > 0 {
+                    char.name = name
+                        
+                        // verifier que le nom est disponible
+                            func nameIsAvailable(){
+                                var nameIsAvailable = readLine()
+                                if let name = nameIsAvailable  {
+                                    nameIsAvailable = name
+                                    print("ce nom est deja pris")
+                                }else{
+                                    print(" votre personnage a un nom qui clac !")
+                                }
+                            
+                            
+                            }
+                    team.append(char)
+                        print("\(char.name) a été ajouté à votre équipe")
+                    }else{
+                        print("Vous devez nomer votre joueur ... veuillez recommencer !")
+                    }
+             
+                }
+       
+            }
+
+
         }
-        
-        
-    
-    
-        
-        // ecouter l'entree clavier pour le choix d'un personnage
-        
    
-            print("Veullez selectionner 3 personnages !")
-        
-        // repeter l'operation jusqu'a ce que on est 3 personnages dans l'equipe
-        
     }
     
+    
 }
-
-
-
+}

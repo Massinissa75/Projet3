@@ -8,7 +8,9 @@
 
 
 
-let massinissa = Wizard (name: "massinissa", life: 99 , dammage: 80, weapon: "sword")
+let massinissa = Player ();
+massinissa.name = "massinissa"
+massinissa.createTeam()
 
 var swiftRobot = Colossus (name: "antonio", life: 100, dammage: 90, weapon: "clavier")
 
