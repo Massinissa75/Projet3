@@ -13,12 +13,13 @@ class Player{
     
     var name: String = ""
     var team: [Character] = []
+    
     // afficher les personnages disponibles
      func createTeam (){
         print(" Bonjour et bienvenue \(name): ")
         
         
-        // repeter l'operation jusquà ce qu'à avoir 3 personnages
+        // repeter l'operation jusqu'à avoir 3 personnages
         
         while team.count < 3 {
             let characterNeeded = 3 - team.count   // le nombre de personnages restant à selectionner
