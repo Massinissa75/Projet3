@@ -11,8 +11,3 @@
 let massinissa = Player ();
 massinissa.name = "massinissa"
 massinissa.createTeam()
-
-var swiftRobot = Colossus (name: "antonio", life: 100, dammage: 90, weapon: "clavier")
-
-
-

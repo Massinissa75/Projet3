@@ -56,32 +56,35 @@ class Player{
                     print("Vous n'avez toujours pas selectionné 3 personnages !")
                 }
                 
-            if let char = character {
+                if let char = character {
                     print("Comment voulez-vous appeler votre personnage?")
-            if let name = readLine(){
-                if name.count > 0 {
-                   char.name = name
-                   team.append(char)
-                    print("\(char.name) a été ajouté à votre équipe")
-                } else {
-                    print("Vous devez nomer votre joueur ... veuillez recommencer !")
-                    
-            func availableName(uniqueName: String)-> Bool{
-                let availableName = name
-                if Player.uniqueName.contains (availableName){
-                    print("Oups ! ce nom est déjà pris.")
-            return false
-                }else{
-                    print(" Votre personnage a un nom qui claque !")
-            return true
-                }
-                            
+                    if let name = readLine(){
+                        if name.count > 0 {
+                            if (availableName(uniqueName: name)) {
+                                char.name = name
+                                team.append(char)
+                                print("\(char.name) a été ajouté à votre équipe")
+                            }else {
+                                print("Le nom \(char.name) est déjà pris")
+                            }
+                        } else {
+                            print("Vous devez nommer votre joueur ... veuillez recommencer !")
+                        }
                     }
-                }
-                }
                 }
             }
         }
+    }
+    func availableName(uniqueName: String)-> Bool{
+        let availableName = name
+        if Player.uniqueName.contains (availableName){
+            print("Oups ! ce nom est déjà pris.")
+            return false
+        }else{
+            print(" Votre personnage a un nom qui claque !")
+            return true
+        }
+        
     }
 }
 
