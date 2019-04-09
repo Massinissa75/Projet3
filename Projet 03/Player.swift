@@ -17,7 +17,7 @@ class Player{
     
     // afficher les personnages disponibles
     func createTeam (){
-        print(" Bonjour et bienvenue \(name): ")
+        print(" Bienvenue \(name): ")
         
         
         // repeter l'operation jusqu'à avoir 3 personnages
@@ -37,7 +37,7 @@ class Player{
             // écouter l'entrée du clavier
             
             let entry = readLine()
-            print(entry)
+            print(entry!)
             
             if let playerChoice = entry {
                 var character : Character?
@@ -58,38 +58,49 @@ class Player{
                 
                 if let char = character {
                            print("Comment voulez-vous appeler votre personnage?")
-                    if let name = readLine(){
-                        if name.count > 0 {
-                        if (availableName(uniqueName: name)) {
-                                char.name = name
+                            name = setName()
+                            char.name = name
                                 team.append(char)
                                 print("\(char.name) a été ajouté à votre équipe")
                             } else {
                             print("Vous devez nommer votre joueur ... veuillez recommencer !")
-                          
                         }
                       
                     }
                     
                 }
-               
             }
-           
+    
+        func setPlayerName(){
+            self.name = setName()
         }
-      
-    }
     
     }
 
 func availableName(uniqueName: String)-> Bool{
     
-    if Player.uniqueName.contains (uniqueName){
+    if Player.uniqueName.contains (uniqueName.lowercased()){
         print("Oups ! le nom \(uniqueName) est dejà pris ! ")
         return false
     }else{
-        Player.uniqueName.append(uniqueName)
+        Player.uniqueName.append(uniqueName.lowercased())
             print(" Votre personnage a un nom qui claque !")
         return true
    }
 }
-}
+    func setName()-> String{
+        if let name = readLine(){
+            if name.count > 0 {
+                if (availableName(uniqueName: name)){
+                    return name
+                }else{
+                    print("Ce nom est déjà pris, veuillez en choisir un autre")
+                    
+                }
+                
+                }
+        }
+                   return setName()
+    }
+
+

@@ -8,6 +8,6 @@
 
 
 
-let massinissa = Player ();
-massinissa.name = "massinissa"
-massinissa.createTeam()
+print("**** Welcome to the GAME ****!")
+
+let game = Game(round: 1)

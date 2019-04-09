@@ -31,16 +31,24 @@ class Game{
     
     func debutDeLaPartie (){  // debut de la partie et création des équipes
         print("Préparez-vous pour la grande bataille !")
-        
-        print("composition de la 1ère équipe")
+       
+        print("Bonjour , comment voulez-vous nommer votre équipe ?")
+        team1.setPlayerName()
         team1.createTeam()
-        print("composition de la 2ère équipe")
+        print("Felicitations ! la 1ère équipea a été crée. ")
+        print("Bonjour , comment voulez-vous nommer votre équipe ?")
+        team2.setPlayerName()
         team2.createTeam()
+        print("Felicitations ! la 2eme équipea a été crée.")
+        
         
         
         
     }
-    func attaque(attacker: Character, defender: Character) {
+    func attaque (attacker: Character, defender: Character){
+        print("\(team1.setPlayerName) vous etes celui qui va attaquer durant ce round ! choisissez votre combatant, votre cible et à l'attaque !")
+        
+    
         
         print("""
                  *** ROUND 1 ***
