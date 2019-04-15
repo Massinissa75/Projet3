@@ -23,6 +23,10 @@ class Character {
         
         
     }
+    func attack (target: Character){
+        target.life = target.life - target.dammage
+        print("\(target.name) a reçcu \(target.dammage) points de degats et a \(target.life) points de vies ")
+    }
 }
 
 class Fighter: Character {
@@ -36,7 +40,11 @@ class Colossus: Character {
         
 
 class Wizard: Character {
-       
+    func heal (target: Character){
+        target.life = target.life + target.dammage
+        print("\(target.name) a reçcu \(target.dammage) points de soins et a \(target.life) points de vies ")
+    }
+
 }
 
 class Dwarf: Character {

@@ -17,7 +17,7 @@ class Player{
     
     // afficher les personnages disponibles
     func createTeam (){
-        print(" Bienvenue \(name): ")
+            print(" Bienvenue \(name): ")
         
         
         // repeter l'operation jusqu'à avoir 3 personnages
@@ -56,38 +56,33 @@ class Player{
                     print("Vous n'avez toujours pas selectionné 3 personnages !")
                 }
                 
-                if let char = character {
-                           print("Comment voulez-vous appeler votre personnage?")
-                            name = setName()
-                            char.name = name
-                                team.append(char)
-                                print("\(char.name) a été ajouté à votre équipe")
-                            } else {
-                            print("Vous devez nommer votre joueur ... veuillez recommencer !")
-                        }
-                      
+            if let char = character {
+                        print("Comment voulez-vous appeler votre personnage?")
+                        char.name = setName()
+                        team.append(char)
+                        print("\(char.name) a été ajouté à votre équipe")
+                    } else {
+                        print("Vous devez nommer votre joueur ... veuillez recommencer !")
                     }
-                    
+                      
                 }
+                    
             }
-    
-        func setPlayerName(){
-            self.name = setName()
         }
-    
+    func setPlayerName(){
+        self.name = setName()
+        }
     }
-
-func availableName(uniqueName: String)-> Bool{
-    
-    if Player.uniqueName.contains (uniqueName.lowercased()){
-        print("Oups ! le nom \(uniqueName) est dejà pris ! ")
+    func availableName(uniqueName: String)-> Bool{
+        if Player.uniqueName.contains (uniqueName.lowercased()){
+            print("Oups ! le nom \(uniqueName) est dejà pris ! ")
         return false
-    }else{
-        Player.uniqueName.append(uniqueName.lowercased())
+        }else{
+            Player.uniqueName.append(uniqueName.lowercased())
             print(" Votre personnage a un nom qui claque !")
         return true
-   }
-}
+        }
+    }
     func setName()-> String{
         if let name = readLine(){
             if name.count > 0 {
@@ -95,12 +90,10 @@ func availableName(uniqueName: String)-> Bool{
                     return name
                 }else{
                     print("Ce nom est déjà pris, veuillez en choisir un autre")
-                    
                 }
-                
-                }
+            }
         }
-                   return setName()
+        return setName()
     }
 
 

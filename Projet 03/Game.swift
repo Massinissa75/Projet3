@@ -27,43 +27,60 @@ class Game{
         team2 = Player ()
         
         debutDeLaPartie()
+        attack()
     }
     
     func debutDeLaPartie (){  // debut de la partie et création des équipes
-        print("Préparez-vous pour la grande bataille !")
-       
-        print("Bonjour , comment voulez-vous nommer votre équipe ?")
-        team1.setPlayerName()
-        team1.createTeam()
-        print("Felicitations ! la 1ère équipea a été crée. ")
-        print("Bonjour , comment voulez-vous nommer votre équipe ?")
-        team2.setPlayerName()
-        team2.createTeam()
-        print("Felicitations ! la 2eme équipea a été crée.")
-        
-        
-        
-        
+            print("Préparez-vous pour la grande bataille !")
+            print("Bonjour , comment voulez-vous nommer votre équipe ?")
+            team1.setPlayerName()
+            team1.createTeam()
+            print("Felicitations ! la 1ère équipea a été crée. ")
+            print("Bonjour , comment voulez-vous nommer votre équipe ?")
+            team2.setPlayerName()
+            team2.createTeam()
+            print("Felicitations ! la 2eme équipea a été crée.")
     }
-    func attaque (attacker: Character, defender: Character){
-        print("\(team1.setPlayerName) vous etes celui qui va attaquer durant ce round ! choisissez votre combatant, votre cible et à l'attaque !")
-        
+        // désigner aléatoirement celui qui va commencer la partie
+    func attack(){
+        let attacker = team1
+        let defender = team2
+            print(" \(attacker.name) vous etes celui qui va commencer la partie")
+// afficher les membres de l'équipe
+            print("Veuillez choisir un combatan parmis les membres de votre équipe: ")
+        for (index, character) in attacker.team.enumerated(){
+            print("\(index) - \(character.name) - \(character.life) - \(character.dammage)")
+        }
+// permettre a l'utilisateur de choisir un combatant de son équipe
+        if let choice = readLine(){
+            print(" vous avez sélectionné le combatant se trouvant au numero \(choice)")
+        }
+// afficher les membres de l'équipe adverse
+            print("Veuillez choisir un combatan parmis les membres de l'équipe adverse: ")
+        for (index, character) in defender.team.enumerated(){
+            print("\(index) - \(character.name) - \(character.life) - \(character.dammage)")
+        }
+// permettre a l'utilisateur de choisir un combatant de l'équipe adverse ( à attaqsuer)
+        if let choice = readLine(){
+            print(" vous allez attaquer le combatant se trouvant au numero \(choice)")
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
         
-        print("""
-                 *** ROUND 1 ***
-                    
-                     FIGHT
-             """)
-        
-        
-        
-        
         /* -
-         - choisir les personnages pour chaque équipe(le combatant qui attaque et celui qui recoit l'attaque)
          - attaquer et infliger des dégats ... recevoir des dégats
          - si life cible = 0 : le joueur à perdu et il passe au second personnage
-         - si temps = 0, on compare la vie restante des 2 combatants pour determiner le vainqueur
          - si life des 3 personnages = 0 le joueur a perdu et la partie est terminee (print: voulez vouz rejouer)*/
         
         
@@ -74,10 +91,4 @@ class Game{
         
         
     }
-    
-    
-    
-    
-}
-
 
