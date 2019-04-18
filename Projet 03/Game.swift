@@ -28,6 +28,7 @@ class Game{
         
         debutDeLaPartie()
         attack()
+        
     }
     
     func debutDeLaPartie (){  // debut de la partie et création des équipes
@@ -45,6 +46,8 @@ class Game{
     func attack(){
         let attacker = team1
         let defender = team2
+        let attackingCharacter : Character?
+        let defendingCharacter: Character?
             print(" \(attacker.name) vous etes celui qui va commencer la partie")
 // afficher les membres de l'équipe
             print("Veuillez choisir un combatan parmis les membres de votre équipe: ")
@@ -53,7 +56,8 @@ class Game{
         }
 // permettre a l'utilisateur de choisir un combatant de son équipe
         if let choice = readLine(){
-            print(" vous avez sélectionné le combatant se trouvant au numero \(choice)")
+            attackingCharacter = attacker.team[Int(choice)!]
+            print(" vous avez sélectionné le combatant \(attacker.team[Int(choice)!])")
         }
 // afficher les membres de l'équipe adverse
             print("Veuillez choisir un combatan parmis les membres de l'équipe adverse: ")
@@ -62,13 +66,23 @@ class Game{
         }
 // permettre a l'utilisateur de choisir un combatant de l'équipe adverse ( à attaqsuer)
         if let choice = readLine(){
-            print(" vous allez attaquer le combatant se trouvant au numero \(choice)")
+            defendingCharacter = defender.team[Int(choice)!]
+            print(" vous allez attaquer le combatant \(defender.team [Int(choice)!])")
         }
     }
+    // attaquer la cible
     
-    
-    
-    
+    func makeAttack(attacker: Character , defender: Character){
+       
+        attacker.attack(target: defender)
+        defender.life -= defender.dammage
+        print(" \(defender.name) a reçu \(defender.dammage) de dégats et il lui reste \(defender.life) points de vie !")
+        if defender.life == 0 {
+            print("le \(defender.name) est mort!")
+        }else{
+            print("le combat continue")
+        }
+     
     
     
     
@@ -92,3 +106,4 @@ class Game{
         
     }
 
+}
