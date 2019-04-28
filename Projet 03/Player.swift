@@ -14,14 +14,12 @@ class Player{
     var name: String = ""
     var team: [Character] = []
     static var uniqueName:[String] = []
-    
+    var attackingCharacter : Character?
+    var deffendingCharacter: Character?
     // afficher les personnages disponibles
     func createTeam (){
             print(" Bienvenue \(name): ")
-        
-        
-        // repeter l'operation jusqu'à avoir 3 personnages
-        
+    // repeter l'operation jusqu'à avoir 3 personnages
         while team.count < 3 {
             let characterNeeded = 3 - team.count   // le nombre de personnages restant à selectionner
             
@@ -33,7 +31,6 @@ class Player{
                 4. Dwarf: Le nain qu'il ne faut jamais sous-estimer
                 (Il vous reste \(characterNeeded) personnage à selectionner)
                 """)
-            
             // écouter l'entrée du clavier
             
             let entry = readLine()
@@ -64,9 +61,7 @@ class Player{
                     } else {
                         print("Vous devez nommer votre joueur ... veuillez recommencer !")
                     }
-                      
                 }
-                    
             }
         }
     func setPlayerName(){

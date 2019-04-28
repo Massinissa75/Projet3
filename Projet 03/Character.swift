@@ -20,22 +20,20 @@ class Character {
         self.life = life
         self.dammage = dammage
         self.weapon = weapon
-        
-        
     }
+        
     func attack (target: Character){
         target.life = target.life - target.dammage
-        print("\(target.name) a reçcu \(target.dammage) points de degats et a \(target.life) points de vies ")
+        print("\(target.name) a reçu \(target.dammage) points de degats. Il a maintenant \(target.life) points de vies ")
     }
 }
 
 class Fighter: Character {
     
-    
 }
 
 class Colossus: Character {
-      
+
 }
         
 
@@ -48,11 +46,7 @@ class Wizard: Character {
 }
 
 class Dwarf: Character {
-   
     
 }
 
-    
-    
-    
 

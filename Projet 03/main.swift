@@ -8,6 +8,6 @@
 
 
 
-print("**** Welcome to the GAME ****!")
+print("**** Welcome to the GAME ****")
 
 let game = Game(round: 1)
