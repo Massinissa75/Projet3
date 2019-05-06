@@ -8,16 +8,11 @@
 
 import Foundation
 
-
-/* dans une partie il y a les 2 joueurs, le choix des personnages, les rounds, le chrono durant le combat, les degats infligés , le vinqueur et le perdant, massage pour proposer une autre partie(continuer)*/
-
-
 class Game{
     
     var team1 : Player
     var team2 : Player
     var round : Int
-    var timeRound : Int = 90
     var attacker = [Character]()
     var defender = [Character]()
     var attackingCharacter: Character?
@@ -28,139 +23,92 @@ class Game{
         team1 = Player ()
         team2 = Player ()
         
-        debutDeLaPartie()
+        beginning()
         attack()
     }
-    func debutDeLaPartie (){  // debut de la partie et création des équipes
-            print("Préparez-vous pour la grande bataille !")
-            print("Bonjour , comment voulez-vous nommer votre équipe ?")
+    //Beginning of the game
+    func beginning (){
+            print("Hello, how do you want to name your team ?")
             team1.setPlayerName()
             team1.createTeam()
-            print("Felicitations ! la 1ère équipea a été crée. ")
-            print("Bonjour , comment voulez-vous nommer votre équipe ?")
+            print("Congrats! The first team was created.")
+            print("Hello, how do you want to name your team ?")
             team2.setPlayerName()
             team2.createTeam()
-            print("Felicitations ! la 2eme équipea a été crée.")
+            print("Congrats! The second team was created.")
     }
-    
-    
-        // désigner celui qui va commencer la partie
+    // function to show team members
+    func makeChoice (in player: Player)-> Character {
+        for (index, character) in player.team.enumerated() {
+            print("""
+                \(index) - Name: \(character.name)
+                ❤️Life: \(character.life)
+                💥Damage: \(character.damage)
+                """)
+        }
+        if let choice = readLine(){
+            if let selected = Int(choice){
+                if (selected < player.team.count && selected >= 0){
+                    return player.team[selected]
+                }
+            }
+        }
+        print("I don't understand ")
+        return makeChoice(in: player)
+    }
+    // function to make attack
     func attack(){
         var attacker = team1
         var defender = team2
         repeat{
-        // Choisir un membre
-        print(" \(attacker.name) vous etes celui qui va commencer la partie")
+    // Choose a member
+            print(" \(attacker.name) you are the one who will start the game this turn. Please choose a character !")
         let attackingCharacter = makeChoice (in: attacker)
-        // Si c'est le mage, il choisi un membre de son équipe à soigné sinon un membre de l'équipe adverse à attaquer
+            print("\(attacker.name) you've choose \(attackingCharacter.name)")
+    // If he is the mage, he chooses a member of his team to be healed if not a member of the opposing team to attack
+            mysteriousBox(character: attackingCharacter)
         if let magus = attackingCharacter as? Wizard {
-            print("\(attacker.name) vous avez choisi \(attackingCharacter.name) pour lui prodiguer des soins")
+            print("\(attacker.name) please choose a member of your team to heal!")
+            print("\(attacker.name) you chose \(attackingCharacter.name) to give him care ")
             let healedCharacter = makeChoice(in: attacker)
-            magus.heal(target: healedCharacter)
-            print("\(healedCharacter.name) a maintenant \(healedCharacter.life) points de vie !")
+            magus.health(target: healedCharacter)
+            print("\(healedCharacter.name) has now \(healedCharacter.life) points of life !")
         } else {
-        // Choix de l'adversaire à attaquer
-            print("\(attacker.name) veuillez choisir un membre de l'équipe adverse à attaquer ")
+        // Choice of the opponent to attack
+            print("\(attacker.name) please choose a member of the opposing team to attack ")
             let defendingCharacter = makeChoice(in: defender)
-            print("\(attacker.name) vous allez attaquer \(defendingCharacter.name)")
-            if defendingCharacter.life > 0 {
+            print("\(attacker.name) you will attack \(defendingCharacter.name)")
             attackingCharacter.attack(target: defendingCharacter)
+            print("\(defendingCharacter.name) has now \(defendingCharacter.life) life points")
+            if defendingCharacter.life <= 0 {
+                if let x = defender.team.firstIndex(where: { $0.name == defendingCharacter.name})
+                {
+                defender.team.remove(at: x)
+                print("\(defendingCharacter.name) is dead !")
+                }
             }
         }
         swap(&attacker, &defender)
         }while (team1.team.count > 0 || team2.team.count > 0)
-
     }
-            
-        // afficher les membres de l'équipe
-    
-        func makeChoice (in player: Player)-> Character {
-            for (index, character) in player.team.enumerated() {
-                print("\(index) - Name: \(character.name) - Life: \(character.life) - Dammage:\(character.dammage)")
+    // Mysterious box function
+    func mysteriousBox (character: Character){           
+        let surprise = Int.random(in: 0...2)
+        if surprise == 1 {
+            print(" What do I see? A safe! open quickly ! ")
+            if let magus = character as? Wizard{
+            magus.weapon = "antidote"
+            magus.heal = 15
+                print("\(magus.name) has received \(magus.weapon) as a new weapon, and can provide \(magus.heal) life points")
             }
-                if let choice = readLine(){
-                    if let selected = Int(choice){
-                        if (selected < player.team.count && selected >= 0){
-                            return player.team[selected]
-                        }
-                    }
-                }
-                print("Je n'ai pas compris")
-                return makeChoice(in: player)
+        } else if surprise == 2 {
+            print(" What do I see? A safe! open quickly ! ")
+            if character is Wizard {
+            } else {
+            character.weapon = "Lightsaber"
+            character.damage = 50
+            print("\(character.name) he received \(character.weapon) as a new combat weapon, and now can inflict \(character.damage) damages points")
+            }
         }
+    }
 }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-          /*  print("Veuillez choisir un combattant parmis les membres de votre équipe: ")
-        for (index, character) in attacker.team.enumerated(){
-            print("\(index) - Nom: \(character.name) - Vie: \(character.life) - Dégats:\(character.dammage)")
-        }
-// permettre a l'utilisateur de choisir un combatant de son équipe
-        if let choice = readLine(){
-            if let selected = Int(choice){
-               attackingCharacter = attacker.team[selected]
-                if let attackingCharacter = attackingCharacter {
-                    print(" vous avez sélectionné le combattant \(attackingCharacter.name)")
-                }
-            }
-        }
-        if let magus = attackingCharacter as? Wizard {
-            print(" \(attacker.name) choisissez un membre de votre equipe à soigner")
-            for (index, character) in attacker.team.enumerated(){
-                print("\(index) - Nom: \(character.name) - Vie: \(character.life) - Dégats:\(character.dammage)")
-            }
-            if let choice = readLine(){
-                if let selected = Int(choice){
-                    defendingCharacter = attacker.team[selected]
-                    let healedCharacter = attacker.team[selected]
-                        print(" vous avez sélectionné le combattant \(healedCharacter.name)")
-                        magus.heal(target: healedCharacter)
-                }
-            }
-        } else {   // afficher les membres de l'équipe adverse
-            
-            
-            print("Veuillez choisir un combattant parmis les membres de l'équipe adverse: ")
-            for (index, character) in defender.team.enumerated(){
-                print("\(index) - nom: \(character.name) - Vie: \(character.life) - Dégats: \(character.dammage)")
-            }
- */
-
-
-
-// permettre a l'utilisateur de choisir un combattant de l'équipe adverse ( à attaqsuer)
- 
-    
-       /*func makeAttack(attacker: Character, defender: Character ){
-           
-        attacker.attack(target: defender)
-        defender.life -= defender.dammage
-        print(" \(defender.name) a reçu \(defender.dammage) de dégats et il lui reste \(defender.life) points de vie !")
-        if defender.life == 0 {
-            print("le \(defender.name) est mort!")
-        }else{
-            print("le combat continue")
-        }
-     
-    makeAttack(attacker: attackingCharacter!, defender: defendingCharacter!)
-
-        
-    }
-        -
-         - attaquer et infliger des dégats ... recevoir des dégats
-         - si life cible = 0 : le joueur à perdu et il passe au second personnage
-         - si life des 3 personnages = 0 le joueur a perdu et la partie est terminee (print: voulez vouz rejouer) */
-

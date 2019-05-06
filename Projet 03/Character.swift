@@ -11,20 +11,26 @@ import Foundation
 
 class Character {
     var name : String
-    var life : Int
-    var dammage : Int
+    var life : Int {
+        didSet {            //when defendingCharacter has no points of life ... he dead
+            if life < 0 {
+                self.life = 0
+            }
+        }
+    }
+    var damage : Int
     var weapon : String
     
-    init(name: String, life: Int, dammage: Int, weapon: String) {
+    init(name: String, life: Int, damage: Int, weapon: String) {
         self.name = name
         self.life = life
-        self.dammage = dammage
+        self.damage = damage
         self.weapon = weapon
     }
         
     func attack (target: Character){
-        target.life = target.life - target.dammage
-        print("\(target.name) a reçu \(target.dammage) points de degats. Il a maintenant \(target.life) points de vies ")
+        target.life = target.life - target.damage
+        print("\(target.name) received \(target.damage) points of dammage. He has now \(target.life) life points ")
     }
 }
 
@@ -38,9 +44,14 @@ class Colossus: Character {
         
 
 class Wizard: Character {
-    func heal (target: Character){
-        target.life = target.life + target.dammage
-        print("\(target.name) a reçcu \(target.dammage) points de soins et a \(target.life) points de vies ")
+    var heal: Int
+    init(name: String, life: Int, weapon: String, damage: Int, heal: Int) {
+        self.heal = heal
+        super.init(name: name, life: 60, damage: 0, weapon: "")
+    }
+    func health (target: Character){
+        target.life = target.life + target.damage
+        print("\(target.name) received \(target.damage) points of heal and  \(target.life) life points ")
     }
 
 }

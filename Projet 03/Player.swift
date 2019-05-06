@@ -16,23 +16,43 @@ class Player{
     static var uniqueName:[String] = []
     var attackingCharacter : Character?
     var deffendingCharacter: Character?
-    // afficher les personnages disponibles
+    //Show the available characters & create team
     func createTeam (){
-            print(" Bienvenue \(name): ")
-    // repeter l'operation jusqu'à avoir 3 personnages
+        print(" Welcome \(name): ")
+    // repeat the operation until you have 3 characters
         while team.count < 3 {
-            let characterNeeded = 3 - team.count   // le nombre de personnages restant à selectionner
-            
+            let characterNeeded = 3 - team.count   // number of characters remaining to select
+
             print("""
-                veuillez constituer votre équipe et choisir entre les personnages suivant:
-                1. Fighter: Le combattant aux 100 points de vies et aux 10 points de dégats
-                2. Colossus: Le gros dur qui ne fait pas trop mal
-                3. Wizard: Le seul magicien capable de bien des surprises
-                4. Dwarf: Le nain qu'il ne faut jamais sous-estimer
-                (Il vous reste \(characterNeeded) personnage à selectionner)
+                Please form your team and choose from the following characters:
+                
+                1. 🥋𝙁𝐼𝘎𝐻𝑇𝑬𝑹: The great and the brave warrior
+                   Characteristics:
+                                     🧡 Life: 100 Pts
+                                     💥 Damage: 10 Pts
+                                     🗡 Weapon: Sword
+                
+                2. 🏋🏼𝑪O𝐿O𝘚𝘚𝘜𝘚: The tough guy who doesn’t hurt too much
+                   Characteristics:
+                                     🧡Life: 110
+                                     💥Damage: 8
+                                     🗡Weapon: Axe
+                
+                3. 🧙‍♂️𝙒𝐼𝒵𝘼𝑹𝘿: The only magician capable of many surprises
+                   Characteristics:
+                                     🧡Life: 90
+                                     💊Health: 6
+                                     🗡Weapon: Magic wand
+                
+                4. 🧝🏾𝘋𝙒𝘼𝑹𝑭: The dwarf must never be underestimated
+                   Characteristics:
+                                    🧡Life: 90
+                                    💥Damage: 12
+                                    🗡Weapon: Mass
+                
+                (You still have \(characterNeeded) character to select)
                 """)
-            // écouter l'entrée du clavier
-            
+        // the user's answer
             let entry = readLine()
             print(entry!)
             
@@ -42,53 +62,49 @@ class Player{
                 switch playerChoice {
                     
                 case "1":
-                    character = Fighter(name:"", life: 100, dammage: 10, weapon:"sword")
+                    character = Fighter(name:"", life: 100, damage: 10, weapon:"Sword")
                 case "2":
-                    character = Colossus(name:"", life: 110, dammage: 5, weapon:"")
+                    character = Colossus(name:"", life: 110, damage: 8, weapon:"Axe")
                 case "3":
-                    character = Wizard (name:"" , life: 80, dammage: 3, weapon:"")
+                    character = Wizard (name:"" , life: 90, weapon:"Magic wand", damage: 0, heal: 6)
                 case "4":
-                    character = Dwarf (name:"", life: 90, dammage: 12, weapon:"")
+                    character = Dwarf (name:"", life: 90, damage: 12, weapon:"Mass")
                 default:
-                    print("Vous n'avez toujours pas selectionné 3 personnages !")
+                    print("You still haven’t selected 3 characters !")
                 }
-                
-            if let char = character {
-                        print("Comment voulez-vous appeler votre personnage?")
-                        char.name = setName()
-                        team.append(char)
-                        print("\(char.name) a été ajouté à votre équipe")
-                    } else {
-                        print("Vous devez nommer votre joueur ... veuillez recommencer !")
-                    }
+                if let char = character {
+                    print("How do you want to call your character?")
+                    char.name = setName()
+                    team.append(char)
+                    print("\(char.name) has been added to your team")
+                } else {
+                    print("You must name your player ... please start again !")
                 }
             }
         }
+    }
     func setPlayerName(){
         self.name = setName()
-        }
     }
-    func availableName(uniqueName: String)-> Bool{
-        if Player.uniqueName.contains (uniqueName.lowercased()){
-            print("Oups ! le nom \(uniqueName) est dejà pris ! ")
+}
+func availableName(uniqueName: String)-> Bool{
+    if Player.uniqueName.contains (uniqueName.lowercased()){
+        print("Oups !\(uniqueName) is already taken. Please choose another one ! ")
         return false
-        }else{
-            Player.uniqueName.append(uniqueName.lowercased())
-            print(" Votre personnage a un nom qui claque !")
+    }else{
+        Player.uniqueName.append(uniqueName.lowercased())
         return true
-        }
     }
-    func setName()-> String{
-        if let name = readLine(){
-            if name.count > 0 {
-                if (availableName(uniqueName: name)){
-                    return name
-                }else{
-                    print("Ce nom est déjà pris, veuillez en choisir un autre")
-                }
+}
+func setName()-> String{
+    if let name = readLine(){
+        if name.count > 0 {
+            if (availableName(uniqueName: name)){
+                return name
+            }else{
+                print("This name is already taken, please choose another one")
             }
         }
-        return setName()
     }
-
-
+    return setName()
+}

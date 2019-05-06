@@ -8,6 +8,16 @@
 
 
 
-print("**** Welcome to the GAME ****")
+print("""
+            ↸⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭⥭↸
+                           W E L C O M E
+                             T O  T H E
+                        ⇝⇝⇝⇝  O C R  ⇜⇜⇜⇜
+                     ⚔️ F I G H T  G A M E ⚔️
+            ↸⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬⥬↸
+        """)
+
+
+
 
 let game = Game(round: 1)
