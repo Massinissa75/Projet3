@@ -34,25 +34,25 @@ class Player{
                 
                 2. 🏋🏼𝑪O𝐿O𝘚𝘚𝘜𝘚: The tough guy who doesn’t hurt too much
                    Characteristics:
-                                     🧡Life: 110
-                                     💥Damage: 8
+                                     🧡Life: 110 Pts
+                                     💥Damage: 8 Pts
                                      🗡Weapon: Axe
                 
                 3. 🧙‍♂️𝙒𝐼𝒵𝘼𝑹𝘿: The only magician capable of many surprises
                    Characteristics:
-                                     🧡Life: 90
-                                     💊Health: 6
+                                     🧡Life: 90 Pts
+                                     💊Health: 6 Pts
                                      🗡Weapon: Magic wand
                 
                 4. 🧝🏾𝘋𝙒𝘼𝑹𝑭: The dwarf must never be underestimated
                    Characteristics:
-                                    🧡Life: 90
-                                    💥Damage: 12
+                                    🧡Life: 90 Pts
+                                    💥Damage: 12 Pts
                                     🗡Weapon: Mass
                 
                 (You still have \(characterNeeded) character to select)
                 """)
-        // the user's answer
+    // the user's answer
             let entry = readLine()
             print(entry!)
             
@@ -87,6 +87,7 @@ class Player{
         self.name = setName()
     }
 }
+// function to name the characters (with unique name)
 func availableName(uniqueName: String)-> Bool{
     if Player.uniqueName.contains (uniqueName.lowercased()){
         print("Oups !\(uniqueName) is already taken. Please choose another one ! ")

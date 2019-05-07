@@ -19,5 +19,6 @@ print("""
 
 
 
-
 let game = Game(round: 1)
+game.beginning()
+game.attack()

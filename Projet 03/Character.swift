@@ -29,19 +29,16 @@ class Character {
     }
         
     func attack (target: Character){
-        target.life = target.life - target.damage
-        print("\(target.name) received \(target.damage) points of dammage. He has now \(target.life) life points ")
+        target.life = target.life - self.damage
+        print("\(target.name) received \(self.damage) points of dammage. He has now \(target.life) life points ")
     }
 }
 
-class Fighter: Character {
-    
-}
+class Fighter: Character {}
 
-class Colossus: Character {
+class Colossus: Character {}
 
-}
-        
+class Dwarf: Character {}
 
 class Wizard: Character {
     var heal: Int
@@ -50,14 +47,11 @@ class Wizard: Character {
         super.init(name: name, life: 60, damage: 0, weapon: "")
     }
     func health (target: Character){
-        target.life = target.life + target.damage
-        print("\(target.name) received \(target.damage) points of heal and  \(target.life) life points ")
+        target.life = target.life + self.heal
+        print("\(target.name) received \(self.heal) points of heal and he has now \(target.life) life points ")
     }
 
 }
 
-class Dwarf: Character {
-    
-}
 
 

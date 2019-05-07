@@ -20,11 +20,8 @@ class Game{
     
     init(round: Int) {
         self.round = round
-        team1 = Player ()
-        team2 = Player ()
-        
-        beginning()
-        attack()
+        team1 = Player()
+        team2 = Player()
     }
     //Beginning of the game
     func beginning (){
@@ -69,17 +66,15 @@ class Game{
             mysteriousBox(character: attackingCharacter)
         if let magus = attackingCharacter as? Wizard {
             print("\(attacker.name) please choose a member of your team to heal!")
-            print("\(attacker.name) you chose \(attackingCharacter.name) to give him care ")
             let healedCharacter = makeChoice(in: attacker)
+            print("\(attacker.name) you choose \(healedCharacter.name) to provide him care ")
             magus.health(target: healedCharacter)
-            print("\(healedCharacter.name) has now \(healedCharacter.life) points of life !")
         } else {
-        // Choice of the opponent to attack
+    // Choice of the opponent to attack
             print("\(attacker.name) please choose a member of the opposing team to attack ")
             let defendingCharacter = makeChoice(in: defender)
             print("\(attacker.name) you will attack \(defendingCharacter.name)")
             attackingCharacter.attack(target: defendingCharacter)
-            print("\(defendingCharacter.name) has now \(defendingCharacter.life) life points")
             if defendingCharacter.life <= 0 {
                 if let x = defender.team.firstIndex(where: { $0.name == defendingCharacter.name})
                 {
@@ -89,20 +84,26 @@ class Game{
             }
         }
         swap(&attacker, &defender)
-        }while (team1.team.count > 0 || team2.team.count > 0)
+        }while (team1.team.count > 0 && team2.team.count > 0)
+        if (team1.team.count > 0){
+            print("")
+            print("\(team1.name) win !")
+        }else{
+            print("\(team2.name) win !")
+        }
     }
     // Mysterious box function
     func mysteriousBox (character: Character){           
-        let surprise = Int.random(in: 0...2)
+        let surprise = Int.random(in: 0...3)
         if surprise == 1 {
-            print(" What do I see? A safe! open quickly ! ")
+            print(" What do I see? A safe! open quickly !")
             if let magus = character as? Wizard{
             magus.weapon = "antidote"
             magus.heal = 15
                 print("\(magus.name) has received \(magus.weapon) as a new weapon, and can provide \(magus.heal) life points")
             }
-        } else if surprise == 2 {
-            print(" What do I see? A safe! open quickly ! ")
+        } else if surprise == 3 {
+            print(" What do I see? A safe! open quickly !")
             if character is Wizard {
             } else {
             character.weapon = "Lightsaber"
