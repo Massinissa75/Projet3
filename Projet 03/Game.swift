@@ -24,7 +24,7 @@ class Game{
         team2 = Player()
     }
     //Beginning of the game
-    func beginning (){
+    func beginning(){
             print("Hello, how do you want to name your team ?")
             team1.setPlayerName()
             team1.createTeam()
@@ -35,8 +35,8 @@ class Game{
             print("Congrats! The second team was created.")
     }
     // function to show team members
-    func makeChoice (in player: Player)-> Character {
-        for (index, character) in player.team.enumerated() {
+    func makeChoice(in player: Player)-> Character {
+        for (index, character) in player.team.enumerated(){
             print("""
                 \(index) - Name: \(character.name)
                 ❤️Life: \(character.life)
@@ -93,7 +93,7 @@ class Game{
         }
     }
     // Mysterious box function
-    func mysteriousBox (character: Character){           
+    func mysteriousBox(character: Character){
         let surprise = Int.random(in: 0...3)
         if surprise == 1 {
             print(" What do I see? A safe! open quickly !")
@@ -104,7 +104,7 @@ class Game{
             }
         } else if surprise == 3 {
             print(" What do I see? A safe! open quickly !")
-            if character is Wizard {
+            if character is Wizard{
             } else {
             character.weapon = "Lightsaber"
             character.damage = 50

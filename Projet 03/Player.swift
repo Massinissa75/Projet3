@@ -42,7 +42,7 @@ class Player{
                    Characteristics:
                                      🧡Life: 90 Pts
                                      💊Health: 6 Pts
-                                     🗡Weapon: Magic wand
+                                     🥢Weapon: Magic wand
                 
                 4. 🧝🏾𝘋𝙒𝘼𝑹𝑭: The dwarf must never be underestimated
                    Characteristics:
@@ -51,6 +51,7 @@ class Player{
                                     🗡Weapon: Mass
                 
                 (You still have \(characterNeeded) character to select)
+                (Please choose a number between 1 and 4)
                 """)
     // the user's answer
             let entry = readLine()
@@ -66,9 +67,9 @@ class Player{
                 case "2":
                     character = Colossus(name:"", life: 110, damage: 8, weapon:"Axe")
                 case "3":
-                    character = Wizard (name:"" , life: 90, weapon:"Magic wand", damage: 0, heal: 6)
+                    character = Wizard(name:"" , life: 90, weapon:"Magic wand", damage: 0, heal: 6)
                 case "4":
-                    character = Dwarf (name:"", life: 90, damage: 12, weapon:"Mass")
+                    character = Dwarf(name:"", life: 90, damage: 12, weapon:"Mass")
                 default:
                     print("You still haven’t selected 3 characters !")
                 }
